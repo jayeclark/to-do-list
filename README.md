@@ -7,16 +7,16 @@ Working off the boilerplate example, I added empty checkboxes along the left han
 
 ## Future Improvements
 Over the course of the week, I'd like to turn this into a basic Kanban board, and add animations for when tasks are completed. For now, I'm posting as is so that I can complete the rest of the coursework for the week and return to this
-[ ] Change the mouse display to indicate clickable areas
-[ ] Add tooltips on hover
-[ ] Add timers to tasks
-[ ] Change the color of tasks as the timer ticks down
-[ ] Add snooze to tasks
-[ ] Add Pomodoro mode
-[ ] Separate into columns based on status and limit pomodoro mode to the "in progress" column
-[ ] Make tasks draggable among the columns
-[ ] Automate movement between columns based on certain actions
-[ ] Allow users to add their own columns
-[ ] Add complexity to task records (i.e. title & description, additional fields, task dependency, etc.
-[ ] Allow drag & drop or ctrl-click selection of multiple tasks
-[ ] Create 'trash bin' of completed tasks at the bottom of the screen.
+[ ] Change the mouse display to indicate clickable areas  
+[ ] Add tooltips on hover  
+[ ] Add timers to tasks  
+[ ] Change the color of tasks as the timer ticks down  
+[ ] Add snooze to tasks  
+[ ] Add Pomodoro mode  
+[ ] Separate into columns based on status and limit pomodoro mode to the "in progress" column  
+[ ] Make tasks draggable among the columns  
+[ ] Automate movement between columns based on certain actions  
+[ ] Allow users to add their own columns  
+[ ] Add complexity to task records (i.e. title & description, additional fields, task dependency, etc.  
+[ ] Allow drag & drop or ctrl-click selection of multiple tasks  
+[ ] Create 'trash bin' of completed tasks at the bottom of the screen.  

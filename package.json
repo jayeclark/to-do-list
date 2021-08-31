@@ -2,7 +2,8 @@
   "name": "to-do-list",
   "version": "1.0.0",
   "description": "To Do List",
-  "main": "index.js",
+  "main": "../public/index.html",
+  "homepage": "../public/index.html",
   "scripts": {
     
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -50,6 +50,7 @@ function App() {
 
     return (
         <div className="todo-list">
+            <div className="column-title-container"><div className="counter"><strong>{todos.length}</strong></div><div className="column-title"><strong>To do</strong></div></div>
             {todos.map((todo,i) => <Todo key={i} todo={todo} index={i} complete={completeTodo} remove={removeTodo}/>)}
             <TodoForm addTodo={addTodo}/>
         </div>

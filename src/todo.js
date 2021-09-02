@@ -81,7 +81,7 @@ function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, 
     const handleChange = e => {
         let btnDisabled = true;
         if (e.target.value !== '') {btnDisabled = false;}
-        setEditFormData({value: e.target.value, index: editFormData.index});
+        setEditFormData({value: e.target.value, index: editFormData.index, type: editFormData.type});
         setDisabled(btnDisabled);
     }
 
@@ -89,7 +89,7 @@ function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, 
         e.preventDefault();
         if (!value) return;
         save(value,editFormData.index);
-        setEditFormData({value:'',index:''});
+        setEditFormData({value:'',index:'',type:''});
         setDisabled(true);
         e.target.reset();
         setEditFormDisplay('collapsed');

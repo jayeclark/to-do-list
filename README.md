@@ -10,7 +10,7 @@ Over the course of the week, I'd like to turn this into a basic Kanban board, an
 [X] Change the styling to mimic GitHub project kanban  
 [X] Make notes editable  
 [X] Add counter to top of column  
-[X] Add drop-down menu on notes
+[X] Add drop-down menu on notes  
 [X] Change the mouse display to indicate clickable areas  
 [ ] Add tooltips on hover  
 [ ] Add timers to tasks  

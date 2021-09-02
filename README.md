@@ -7,8 +7,11 @@ Working off the boilerplate example, I added empty checkboxes along the left han
 
 ## Future Improvements
 Over the course of the week, I'd like to turn this into a basic Kanban board, and add animations for when tasks are completed. For now, I'm posting as is so that I can complete the rest of the coursework for the week and return to this  
-[ ] Change the styling to mimic GitHub project kanban  
-[ ] Change the mouse display to indicate clickable areas  
+[X] Change the styling to mimic GitHub project kanban  
+[X] Make notes editable  
+[X] Add counter to top of column  
+[X] Add drop-down menu on notes
+[X] Change the mouse display to indicate clickable areas  
 [ ] Add tooltips on hover  
 [ ] Add timers to tasks  
 [ ] Change the color of tasks as the timer ticks down  

@@ -1,6 +1,6 @@
 # to-do-list
 
-![Todo List Screenshot](https://github.com/jayeclark/to-do-list/blob/main/todo-screenshot.png?raw=true)
+![Todo List Screenshot](https://github.com/jayeclark/to-do-list/blob/main/todo-screenshot.png?raw=true)  
 This project demonstrates a styled version of a To Do list using React.useState.
 
 Working off the boilerplate example, I added empty checkboxes along the left hand side that changed to 'checked' when clicked. The task background also gets darker and the text changes to green. I also separated out the 'remove' option into its own div, and the checkboxes will only be removed if that specific area is clicked (not the entire todo item.)

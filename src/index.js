@@ -26,6 +26,7 @@ function App() {
         {
             value: '',
             index: '',
+            type: '',
         }
     )
 

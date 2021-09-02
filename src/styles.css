@@ -1,6 +1,6 @@
 body {
-    margin: 10px;
     font-family: 'Arial';
+    margin: 0px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -368,6 +368,7 @@ fieldset[disabled] .btn-primary:hover {
 
 .edit-form {
     position: absolute;
+    padding-left: -30px;
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.4);

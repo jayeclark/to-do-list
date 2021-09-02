@@ -39,7 +39,7 @@ function Todo({todo, index, props}){
                     <div className="todo-title">{todo.text}</div>
                     <div className="remove" onClick={toggleMoreMenu}><MoreIcon /></div>
                     <div className={menuDisplay} style={{zIndex:1000,position:'absolute',top:'20px',right:'-16px'}}>
-                        <MoreMenu remove={remove} toggleEditForm={toggleEditForm} index={index} setMenuDisplay={setMenuDisplay} value={todo.text} setEditFormData={setEditFormData}/>
+                        <MoreMenu remove={remove} toggleEditForm={toggleEditForm} index={index} setMenuDisplay={setMenuDisplay} value={todo.text} type='note' setEditFormData={setEditFormData}/>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@ function Todo({todo, index, props}){
     )
 }
 
-function MoreMenu({remove, toggleEditForm, index, value, setMenuDisplay, setEditFormData}) {
+function MoreMenu({remove, toggleEditForm, index, value, type, setMenuDisplay, setEditFormData}) {
 
     const handleEdit = () => {
-        setEditFormData({value,index});
+        setEditFormData({value,index,type});
         toggleEditForm();
         setMenuDisplay('collapsed');
     }
@@ -61,14 +61,18 @@ function MoreMenu({remove, toggleEditForm, index, value, setMenuDisplay, setEdit
     }
 
     return (
-            <div className="menu"><div className="menu-item" onClick={handleEdit}>Edit note</div>
-            <div className="menu-item" onClick={handleDelete}>Delete note</div></div>
+            
+            <div className="menu">
+                {type == 'note' ? <div className="menu-item" style={{color: 'lightgray',cursor:'not-allowed'}}>Add timer</div> : null}
+                <div className="menu-item" onClick={handleEdit}>Edit {type}</div>
+                <div className="menu-item" onClick={handleDelete}>Delete {type}</div>
+            </div>
     )
 }
 
 function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, setEditFormData, toggleEditForm}) {
    
-    const value = editFormData.value;
+    const {value,type} = editFormData;
 
     const [disabled, setDisabled] = React.useState(true);
 
@@ -99,9 +103,9 @@ function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, 
         <div style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
             <div className="edit-todo">
                 <div style={{borderRadius: '10px 10px 0px 0px', backgroundColor:'#F6f8fa',borderBottom:'1px solid rgba(186,188,190,0.4)',margin:'-16px -16px 0px -16px',padding:'16px',fontSize:'14px',fontWeight:'bold',display:'flex',width:'100%'}}>
-                    <div style={{flexGrow:1}}>Edit note</div><div style={{flexGrow:0}} onClick={toggleEditForm}><XIcon /></div>
+                    <div style={{flexGrow:1}}>Edit {type}</div><div style={{flexGrow:0}} onClick={toggleEditForm}><XIcon /></div>
                 </div>
-                <div style={{padding:'16px 0px 8px 0px',fontSize:'14px'}}><strong>Note</strong></div>
+                <div style={{padding:'16px 0px 8px 0px',fontSize:'14px'}}><strong>{type.charAt(0).toUpperCase()+type.slice(1)}</strong></div>
                 <form onSubmit={handleSubmit} style={{flexGrow:1}}>
                 <div style={{width:'100%'}}>
                 <textarea 
@@ -119,7 +123,7 @@ function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, 
                     <div style={{flexGrow:1, width:'50%', margin:'0px 5px 0px 0px'}}>
                         <div style={{position:'relative'}}>
                             <div>
-                                <button id="submitBtn" style={{width: '100%',position:'absolute'}} className="btn btn-primary btn-grow" type="submit" disabled={disabled}>Save note</button>
+                                <button id="submitBtn" style={{width: '100%', position:'absolute'}} className="btn btn-primary btn-grow" type="submit" disabled={disabled}>Save {type}</button>
                             </div>
                         </div>
                         

@@ -147,7 +147,7 @@ code {
     cursor:pointer;
     background-image:none;
     border:1px solid transparent;
-    padding:10px 15px;
+    padding:6px 15px;
     font-size:14px;
     line-height:1.42857143;
     border-radius:6px;
@@ -261,7 +261,7 @@ fieldset[disabled] .btn-default:hover {
     color:#fff;
     background-color:#2da44e;
     border-color:#2da44e;
-    padding:10px 15px
+    padding:6px 15px
 }
 
 .btn-primary.focus,
@@ -310,7 +310,7 @@ fieldset[disabled] .btn-primary.focus,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:hover {
     background-color:#2da44e;
-    border-color:#2da44e
+    border-color:#ccc
 }
 
 .btn-primary .badge {

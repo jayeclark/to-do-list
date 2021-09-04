@@ -3,7 +3,7 @@ function App() {
 
     const [todos, setTodos] = React.useState([
         {
-            text: 'Cards can be added to your board to track your to-do items for the day.',
+            text: 'Add cards to this board to track your to-do items for the day.',
             checkbox: String.fromCharCode(9744),
             class: "todo",
             isCompleted: false,
@@ -15,7 +15,7 @@ function App() {
             class: "todo",
         },
         {
-            text: '**Removing items.**\nTo remove an item from the list, click on the three dots at the upper right of the item card.',
+            text: '**Removing items.**\nTo remove a card from the list, click on the three dots at the upper right of the item card.',
             isCompleted: false,
             checkbox: String.fromCharCode(9744),
             class: "todo",

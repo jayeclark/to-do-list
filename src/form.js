@@ -17,7 +17,7 @@ function TodoForm({addTodo, toggleForm, inlineFormDisplay}) {
     const handleSubmit = e => {
         e.preventDefault();
         if (!value) return;
-        addTodo(parseMarkup(value));
+        addTodo(value);
         setValue('');
         setDisabled(true);
         e.target.reset();

@@ -111,7 +111,7 @@ function App() {
                     <div className="column-icon"><MoreIcon/></div>
                 </div>
                 <div className={inlineFormDisplay}>
-                    <TodoForm addTodo={addTodo} toggleForm={toggleForm} formDisplay={inlineFormDisplay} type='add'/>
+                    <TodoForm addTodo={addTodo} toggleForm={toggleForm} inlineFormDisplay={inlineFormDisplay} type='add'/>
                 </div>
                 {todos.map((todo,i) => <Todo props={todoProps} todo={todo} key={i} index={i} />)}
             </div>

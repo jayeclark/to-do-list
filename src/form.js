@@ -39,7 +39,7 @@ function TodoForm({addTodo, toggleForm, inlineFormDisplay}) {
                 autoComplete="off"
                 className="input" 
                 value={value} 
-                style={{padding:'8px',lineHeight: '1.5', fontSize:'14px',fontFamily:'inherit',maxWidth:'100%', height:height == 0 ? 38 : height}}
+                style={{padding:'8px',lineHeight: '1.5', backgroundColor: '#fff', fontSize:'14px',fontFamily:'inherit',maxWidth:'100%', height:height == 0 ? 38 : height}}
                 placeholder="Enter a note..."
                 onChange={handleChange}
                 name="todo" />

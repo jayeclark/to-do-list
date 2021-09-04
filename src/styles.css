@@ -420,7 +420,7 @@ code {
     overflow: auto;
     padding: 0px 2px 1px 2px;
     position: relative;
-    top: -2px;
+    top: -1px;
     word-wrap: normal;
     line-break: strict;
     flex-wrap: nowrap;

@@ -67,12 +67,15 @@ function TodoFormEdit({save, popupFormDisplay, setPopupFormDisplay, editFormData
 
     const [disabled, setDisabled] = React.useState(true);
 
+    const [height, setHeight] = React.useState('');
+
     const inputFocus = React.useRef(null);
 
     const handleChange = e => {
         let btnDisabled = true;
         if (e.target.value !== '') {btnDisabled = false;}
         setEditFormData({value: e.target.value, index: editFormData.index, type: editFormData.type});
+        setHeight(e.target.scrollHeight);
         setDisabled(btnDisabled);
     }
 
@@ -87,7 +90,10 @@ function TodoFormEdit({save, popupFormDisplay, setPopupFormDisplay, editFormData
     }
 
     React.useEffect(()=>{
-        if (popupFormDisplay == 'expanded') {inputFocus.current.focus();}
+        if (popupFormDisplay == 'expanded') {
+            setHeight(inputFocus.current.scrollHeight);
+            inputFocus.current.focus();
+        }
     },[popupFormDisplay, disabled])
 
     return (
@@ -105,7 +111,7 @@ function TodoFormEdit({save, popupFormDisplay, setPopupFormDisplay, editFormData
                     ref={inputFocus}
                     autoComplete="off"
                     className="input" 
-                    style={{padding:'8px',fontFamily:'inherit',fontSize:'14px',minWidth:'300px',maxWidth:'100%'}}
+                    style={{padding:'8px',fontFamily:'inherit',fontSize:'14px',minWidth:'300px',maxWidth:'100%',height:height}}
                     value={editFormData.value} 
                     onChange={handleChange}
                     name="todo" />
@@ -131,7 +137,6 @@ function TodoFormEdit({save, popupFormDisplay, setPopupFormDisplay, editFormData
 }
 
 function ParsedLine({snip}) {
-    console.log(snip);
     let tag = snip.includes('<strong>') ? 'strong' : snip.includes('<em>') ? 'em' : snip.includes('<br>') ? 'br' : snip.includes('<p>') ? 'p' : snip.includes('<code>') ? 'code' : ''
     let remove = ['<strong>','</strong>','<em>','</em>','<p>','</p>','<br>','<code>','</code>'];
     remove.forEach(x => snip = snip.replace(x,''));
@@ -171,7 +176,6 @@ function ParsedLine({snip}) {
 
 function ParsedText(value) {
 
-    console.log(value.value);
     let text = value.value;
     let parse = false;
     const regex1 = new RegExp('\n');
@@ -185,16 +189,15 @@ function ParsedText(value) {
     text = text.replace(/\*\*/g,'---**---');
     text = text.replace(/(?<!\*)\*(?!\*)/g,'---*---');
     text = text.replaceAll('```','---```---');
-    console.log(text);
+
     let arr = text.split('---');
-    if (arr.length > 1) console.log(arr);
+
     while (arr.includes('**')) {
         let newElement = '<strong>' + arr[arr.indexOf('**')+1]+'</strong>';
         arr.splice(arr.indexOf('**'),3,newElement);
     }
     while (arr.includes('```')) {
         let newElement = '<code>' + arr[arr.indexOf('```')+1]+'</code>';
-        console.log(newElement);
         arr.splice(arr.indexOf('```'),3,newElement);
     }
     while (arr.includes('*')) {
@@ -211,7 +214,6 @@ function ParsedText(value) {
     }
 
     if (parse == false) return <>{text}</>;
-    if (arr.length > 1) console.log(arr)
 
     return (<>{arr.map((snip,i) => <ParsedLine snip={snip} key={i}/>)}</>)
 }

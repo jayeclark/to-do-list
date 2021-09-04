@@ -5,12 +5,15 @@ function TodoForm({addTodo, toggleForm, inlineFormDisplay}) {
 
     const [disabled, setDisabled] = React.useState(true);
 
+    const [height, setHeight] = React.useState('');
+
     const inputFocus = React.useRef(null);
 
     const handleChange = e => {
         let btnDisabled = true;
         if (e.target.value !== '') {btnDisabled = false;}
         setValue(e.target.value);
+        setHeight(e.target.scrollHeight);
         setDisabled(btnDisabled);
     }
 

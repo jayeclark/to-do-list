@@ -15,7 +15,7 @@ function App() {
             class: "todo",
         },
         {
-            text: '**Removing items.**\nTo remove a card from the list, click on the three dots at the upper right of the item card.',
+            text: 'To remove a card from the list, click on the three dots at the upper right of the item card.',
             isCompleted: false,
             checkbox: String.fromCharCode(9744),
             class: "todo",

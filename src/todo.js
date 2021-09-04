@@ -184,11 +184,15 @@ function ParsedText(value) {
 
     if (text.search(regex1) > -1 || text.search(regex2) > -1 || text.search(regex3) > -1 ) {parse = true;}
 
-    text = text.replaceAll('\n\n','---\n\n---');
+    text = text.replace(/\n\n/g,'---\n\n---');
     text = text.replace(/(?<!\n)\n(?!\n)/g,'---\n---');
-    text = text.replace(/\*\*/g,'---**---');
-    text = text.replace(/(?<!\*)\*(?!\*)/g,'---*---');
-    text = text.replaceAll('```','---```---');
+    text = text.replace(/(?<![\\|\\\*\*])\*\*/g,'---**---');
+    text = text.replace(/(?<![\\|\*|\\\*])\*(?!\*)/g,'---*---');
+    text = text.replace(/(?<![\\```|\\])```/g,'---```---');
+
+    text = text.replace(/\\(?=\n)/g,'');
+    text = text.replace(/\\(?=\*)/g,'');
+    text = text.replace(/\\(?=```)/g,'');
 
     let arr = text.split('---');
 

@@ -9,7 +9,7 @@ function App() {
             isCompleted: false,
         },
         {
-            text: 'Cards accept basic markdown formatting: **bold**, *italics*, line breaks (shift + enter), and ```code snippets```.',
+            text: 'Cards accept basic markdown formatting: \\** **bold** \\**, \\* *italics* \\*, \\``` ```code snippets``` \\```, and line breaks ('+String.fromCharCode(8679)+'+'+String.fromCharCode(11152)+') ',
             isCompleted: false,
             checkbox: String.fromCharCode(9744),
             class: "todo",

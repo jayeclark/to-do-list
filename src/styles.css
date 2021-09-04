@@ -389,3 +389,39 @@ fieldset[disabled] .btn-primary:hover {
     height: auto;
     border: 1px solid rgba(186,188,190,0.4);
 }
+
+pre {
+    background: #777;
+    border: 1px solid #555;
+    border-radius: 3px;
+    color: peachpuff;
+    font-weight:600;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1;
+    overflow: auto;
+    width: auto;
+    padding: 2px 4px;
+    margin: 2px;
+    word-wrap: break-word;
+}
+
+code {
+    background: #eee;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    color: rgb(205, 33, 131);
+    font-weight:500;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 10px;
+    line-height: 0.75;
+    overflow: auto;
+    padding: 0px 2px 1px 2px;
+    position: relative;
+    top: -2px;
+    word-wrap: normal;
+    line-break: strict;
+    flex-wrap: nowrap;
+}

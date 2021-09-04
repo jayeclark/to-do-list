@@ -3,19 +3,19 @@ function App() {
 
     const [todos, setTodos] = React.useState([
         {
-            text: 'Learn react',
+            text: 'Cards can be added to your board to track your to-do items for the day.',
             checkbox: String.fromCharCode(9744),
             class: "todo",
             isCompleted: false,
         },
         {
-            text: 'Make lunch',
+            text: 'Cards accept basic markdown formatting: **bold**, *italics*, line breaks (shift + enter), and ```code snippets```.',
             isCompleted: false,
             checkbox: String.fromCharCode(9744),
             class: "todo",
         },
         {
-            text: 'Build app',
+            text: '**Removing items.**\nTo remove an item from the list, click on the three dots at the upper right of the item card.',
             isCompleted: false,
             checkbox: String.fromCharCode(9744),
             class: "todo",
@@ -35,9 +35,9 @@ function App() {
         setTodos(newTodos);
     }
 
-    const [formDisplay, setFormDisplay] = React.useState('collapsed');
+    const [inlineFormDisplay, setInlineFormDisplay] = React.useState('collapsed');
 
-    const [editFormDisplay, setEditFormDisplay] = React.useState('collapsed');
+    const [popupFormDisplay, setPopupFormDisplay] = React.useState('collapsed');
 
     const removeTodo = index => {
         let temp = [...todos];
@@ -66,18 +66,18 @@ function App() {
 
     const toggleForm = () => {
 
-        if (formDisplay == 'expanded') {
-            setFormDisplay('collapsed')
+        if (inlineFormDisplay == 'expanded') {
+            setInlineFormDisplay('collapsed')
         } else {
-            setFormDisplay('expanded'); 
+            setInlineFormDisplay('expanded'); 
         }
     }
 
     const toggleEditForm = () => {
-        if (editFormDisplay == 'expanded') {
-            setEditFormDisplay('collapsed')
+        if (popupFormDisplay == 'expanded') {
+            setPopupFormDisplay('collapsed')
         } else {
-            setEditFormDisplay('expanded');
+            setPopupFormDisplay('expanded');
         }
     }
 
@@ -91,12 +91,12 @@ function App() {
 
     return (
         <div>
-            <div className={editFormDisplay} style={{display:'flex',flexDirection:'row'}}>
+            <div className={popupFormDisplay} style={{display:'flex',flexDirection:'row'}}>
                 <div className="edit-form">  
                     <TodoFormEdit 
                         save={saveTodo} 
-                        editFormDisplay={editFormDisplay} 
-                        setEditFormDisplay={setEditFormDisplay} 
+                        popupFormDisplay={popupFormDisplay} 
+                        setPopupFormDisplay={setPopupFormDisplay} 
                         editFormData={editFormData}
                         setEditFormData={setEditFormData}
                         toggleEditForm={toggleEditForm} 
@@ -110,8 +110,8 @@ function App() {
                     <div className="column-icon" onClick={toggleForm}><PlusIcon/></div>
                     <div className="column-icon"><MoreIcon/></div>
                 </div>
-                <div className={formDisplay}>
-                    <TodoForm addTodo={addTodo} toggleForm={toggleForm} formDisplay={formDisplay} type='add'/>
+                <div className={inlineFormDisplay}>
+                    <TodoForm addTodo={addTodo} toggleForm={toggleForm} formDisplay={inlineFormDisplay} type='add'/>
                 </div>
                 {todos.map((todo,i) => <Todo props={todoProps} todo={todo} key={i} index={i} />)}
             </div>

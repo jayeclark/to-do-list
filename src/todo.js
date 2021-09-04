@@ -11,15 +11,6 @@ function Todo({todo, index, props}){
 
     const [formDisplay, setFormDisplay] = React.useState('collapsed');
 
-    const toggleForm = () => {
-
-        if (formDisplay == 'expanded') {
-            setFormDisplay('collapsed')
-        } else {
-            setFormDisplay('expanded'); 
-        }
-    }
-
     const [menuDisplay, setMenuDisplay] = React.useState('collapsed');
 
     const toggleMoreMenu = () => {
@@ -36,7 +27,7 @@ function Todo({todo, index, props}){
             <div id={checkID} onClick={handleComplete} className="card-icon"><CardIcon /></div>
             <div style={{flexGrow:1}}>
                 <div style={{display:'flex',position:'relative',flexWrap:'nowrap',width:'100%'}} className={formDisplay == 'collapsed' ? 'expanded' : 'collapsed'}>
-                    <div className="todo-title">{todo.text}</div>
+                    <div className="todo-title"><ParsedText value={todo.text}/></div>
                     <div className="remove" onClick={toggleMoreMenu}><MoreIcon /></div>
                     <div className={menuDisplay} style={{zIndex:1000,position:'absolute',top:'20px',right:'-16px'}}>
                         <MoreMenu remove={remove} toggleEditForm={toggleEditForm} index={index} setMenuDisplay={setMenuDisplay} value={todo.text} type='note' setEditFormData={setEditFormData}/>
@@ -70,7 +61,7 @@ function MoreMenu({remove, toggleEditForm, index, value, type, setMenuDisplay, s
     )
 }
 
-function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, setEditFormData, toggleEditForm}) {
+function TodoFormEdit({save, popupFormDisplay, setPopupFormDisplay, editFormData, setEditFormData, toggleEditForm}) {
    
     const {value,type} = editFormData;
 
@@ -92,12 +83,12 @@ function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, 
         setEditFormData({value:'',index:'',type:''});
         setDisabled(true);
         e.target.reset();
-        setEditFormDisplay('collapsed');
+        setPopupFormDisplay('collapsed');
     }
 
     React.useEffect(()=>{
-        if (editFormDisplay == 'expanded') {inputFocus.current.focus();}
-    },[editFormDisplay, disabled])
+        if (popupFormDisplay == 'expanded') {inputFocus.current.focus();}
+    },[popupFormDisplay, disabled])
 
     return (
         <div style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
@@ -137,4 +128,90 @@ function TodoFormEdit({save, editFormDisplay, setEditFormDisplay, editFormData, 
         </div>
     );
 
+}
+
+function ParsedLine({snip}) {
+    console.log(snip);
+    let tag = snip.includes('<strong>') ? 'strong' : snip.includes('<em>') ? 'em' : snip.includes('<br>') ? 'br' : snip.includes('<p>') ? 'p' : snip.includes('<code>') ? 'code' : ''
+    let remove = ['<strong>','</strong>','<em>','</em>','<p>','</p>','<br>','<code>','</code>'];
+    remove.forEach(x => snip = snip.replace(x,''));
+
+    if (tag == 'strong') {
+        return (
+            <strong>{snip}</strong>
+        )
+    }
+    else if (tag == 'em') {
+        return (
+            <em>{snip}</em>
+        )
+    }
+    else if (tag == 'br') {
+        return (
+            <>{snip}<br/></>
+        )
+    }
+    else if (tag == 'p') {
+        return (
+            <>{snip}<br/><br/></>
+        )
+    }
+    else if (tag == 'code') {
+        return (
+            <code>{snip}</code>
+        )
+    }
+    else if (tag == '') {
+        return (
+        <>{snip}</>
+        )
+    }
+
+}
+
+function ParsedText(value) {
+
+    console.log(value.value);
+    let text = value.value;
+    let parse = false;
+    const regex1 = new RegExp('\n');
+    const regex2 = new RegExp('\\*');
+    const regex3 = new RegExp('```');
+
+    if (text.search(regex1) > -1 || text.search(regex2) > -1 || text.search(regex3) > -1 ) {parse = true;}
+
+    text = text.replaceAll('\n\n','---\n\n---');
+    text = text.replace(/(?<!\n)\n(?!\n)/g,'---\n---');
+    text = text.replace(/\*\*/g,'---**---');
+    text = text.replace(/(?<!\*)\*(?!\*)/g,'---*---');
+    text = text.replaceAll('```','---```---');
+    console.log(text);
+    let arr = text.split('---');
+    if (arr.length > 1) console.log(arr);
+    while (arr.includes('**')) {
+        let newElement = '<strong>' + arr[arr.indexOf('**')+1]+'</strong>';
+        arr.splice(arr.indexOf('**'),3,newElement);
+    }
+    while (arr.includes('```')) {
+        let newElement = '<code>' + arr[arr.indexOf('```')+1]+'</code>';
+        console.log(newElement);
+        arr.splice(arr.indexOf('```'),3,newElement);
+    }
+    while (arr.includes('*')) {
+        let newElement = '<em>' + arr[arr.indexOf('*')+1]+'</em>';
+        arr.splice(arr.indexOf('*'),3,newElement);
+    }
+    while (arr.includes('\n\n')) {
+        let newElement = '<p>' + arr[arr.indexOf('\n\n')-1]+'</p>';
+        arr.splice(arr.indexOf('\n\n')-1,2,newElement);
+    }
+    while (arr.includes('\n')) {
+        let newElement = arr[arr.indexOf('\n')-1]+'<br>';
+        arr.splice(arr.indexOf('\n')-1,2,newElement);
+    }
+
+    if (parse == false) return <>{text}</>;
+    if (arr.length > 1) console.log(arr)
+
+    return (<>{arr.map((snip,i) => <ParsedLine snip={snip} key={i}/>)}</>)
 }

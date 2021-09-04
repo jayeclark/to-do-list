@@ -1,5 +1,5 @@
 
-function TodoForm({addTodo, toggleForm, formDisplay}) {
+function TodoForm({addTodo, toggleForm, inlineFormDisplay}) {
 
     const [value, setValue] = React.useState('');
 
@@ -17,15 +17,15 @@ function TodoForm({addTodo, toggleForm, formDisplay}) {
     const handleSubmit = e => {
         e.preventDefault();
         if (!value) return;
-        addTodo(value);
+        addTodo(parseMarkup(value));
         setValue('');
         setDisabled(true);
         e.target.reset();
     }
 
     React.useEffect(()=>{
-        if (formDisplay == 'expanded') {inputFocus.current.focus();}
-    },[formDisplay, disabled])
+        if (inlineFormDisplay == 'expanded') {inputFocus.current.focus();}
+    },[inlineFormDisplay, disabled])
 
     return (
             <form onSubmit={handleSubmit} style={{flexGrow:1}}>

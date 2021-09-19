@@ -1,6 +1,6 @@
 function Todo({todo, index, props}){
 
-    const {complete, remove, save, toggleEditForm, setEditFormData} = props;
+    const {complete, remove, toggleEditForm, setEditFormData} = props;
 
     function handleComplete(){
         complete(index);
@@ -185,10 +185,26 @@ function ParsedText(value) {
     if (text.search(regex1) > -1 || text.search(regex2) > -1 || text.search(regex3) > -1 ) {parse = true;}
 
     text = text.replace(/\n\n/g,'---\n\n---');
-    text = text.replace(/(?<!\n)\n(?!\n)/g,'---\n---');
-    text = text.replace(/(?<![\\|\\\*\*])\*\*/g,'---**---');
-    text = text.replace(/(?<![\\|\*|\\\*])\*(?!\*)/g,'---*---');
-    text = text.replace(/(?<![\\```|\\])```/g,'---```---');
+
+    while (text.search(/[^\n](?=(\n)([^\n]))/) > -1) {
+        console.log(text);
+        text = text.replace(/[^\n](\n)(?=[^\n])/,'$&\n---');
+        console.log(text);
+        text = text.replace(/[^\n](?=(\n\-\-\-)([^\n]))/,'$&---');
+        console.log(text);
+    }
+
+    while (text.search(/([^(\\)(\-)(\\\*\*)])(\*\*)/) > -1) {
+        text = text.replace(/([^(\\)(\-)(\\\*\*)])(\*\*)/,'$1---**---');
+    }
+
+    while (text.search(/([^(\\\*)(\\)(\-)(\*)])(\*)([^\*\-])/) > -1) {
+        text = text.replace(/([^(\\\*)(\\)(\-)(\*)])(\*)([^\*\-])/,'$1---*---$3');
+    }
+
+    while (text.search(/([^(\\```)(\\)(\-)])(```)/) > -1) {
+        text = text.replace(/([^(\\```)(\\)(\-)])(```)/,'$1---```---');
+    }
 
     text = text.replace(/\\(?=\n)/g,'');
     text = text.replace(/\\(?=\*)/g,'');
